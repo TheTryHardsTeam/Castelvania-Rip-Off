@@ -1,5 +1,6 @@
 using System;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -15,21 +16,20 @@ class Player : Entity
     public override Vector2 position { get; set; }
     public override float width { get; }
     public override float height { get; }
-    public override Texture2D sprite { get; set; }
     public override bool ShouldShowBoundingBox { get; set; }
     public override int id { get; }
     public override bool isPlayable { get; }
-    public Player(string name, int health, int mana, float x, float y, float width, float height, Texture2D texture, bool isPlayable = true)
+
+    public Player(string name, float x, float y, float width, float height, string spritePath, ContentManager content) : base(content, spritePath)
     {
         this.name = name;
-        this.health = health;
-        this.mana = mana;
         this.position = new Vector2(x, y);
         this.width = width;
         this.height = height;
-        this.sprite = texture;
-        this.isPlayable = isPlayable;
-        this.ShouldShowBoundingBox = true;
+        this.sprite = sprite;
+        this.ShouldShowBoundingBox = false;
+        this.id = 0;
+        this.isPlayable = true;
     }
 
     /// <summary>
@@ -45,43 +45,23 @@ class Player : Entity
 
         if (currenteState.IsKeyDown(Keys.W))
         {
-            this.position += this.MoveUp();
+            this.position += new Vector2(0, -1);
         }
 
         if (currenteState.IsKeyDown(Keys.S))
         {
-            this.position += this.MoveDown();
+            this.position += new Vector2(0, 1);
         }
 
         if (currenteState.IsKeyDown(Keys.A))
         {
-            this.position += this.MoveLeft();
+            this.position += new Vector2(-1, 0);
         }
 
         if (currenteState.IsKeyDown(Keys.D))
         {
-            this.position += this.MoveRight();
+            this.position += new Vector2(1, 0);
         }
-    }
-
-    private Vector2 MoveUp()
-    {
-        return new Vector2(0, -1);
-    }
-
-    private Vector2 MoveDown()
-    {
-        return new Vector2(0, 1);
-    }
-
-    private Vector2 MoveLeft()
-    {
-        return new Vector2(-1, 0);
-    }
-
-    private Vector2 MoveRight()
-    {
-        return new Vector2(1, 0);
     }
 
     override public void Update(GameTime gameTime)
