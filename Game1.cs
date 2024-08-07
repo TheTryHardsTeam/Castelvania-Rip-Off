@@ -1,5 +1,6 @@
 using System;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -12,6 +13,7 @@ namespace castelvaniaripoff
         SpriteBatch spriteBatch;
         Player player;
         Texture2D playerTexture, pixel;
+        Song backgroundMusic;
 
         public Game1()
         {
@@ -31,6 +33,9 @@ namespace castelvaniaripoff
             playerTexture = Content.Load<Texture2D>("Graphics/Characters/main");
             // TODO I need to create a better way to load the player, for now I will just create it here, possible a PlayerManager?.
             player = new Player("Player", 100, 100, 50, 50, 24, 24, playerTexture);
+
+            backgroundMusic = Content.Load<Song>("Audio/Music/background_normal");
+            MediaPlayer.Play(backgroundMusic);
 
             // Doing this just to have to have a pixel to draw the bounding box. XNA is so powerful that it doesn't have a way to draw a simple rectangle.
             pixel = new Texture2D(GraphicsDevice, 1, 1);
