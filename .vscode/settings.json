@@ -1,6 +1,6 @@
 {
     // This prevents Omnisharp from prematurely creating obj and bin directories.
     // Change this to true after changing the name of the csproj file and running Restore Project.
-    "omnisharp.autoStart": false,
-    "dotnet.codeLens.enableReferencesCodeLens": false,
+    "omnisharp.autoStart": true,
+    "dotnet.codeLens.enableReferencesCodeLens": true,
 }
