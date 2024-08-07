@@ -8,11 +8,9 @@ namespace castelvaniaripoff
 {
     class Game1 : Game
     {
-        private KeyboardState keyboardState;
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Player player;
-        Texture2D playerTexture, pixel;
+        Texture2D pixel;
         Song backgroundMusic;
         GameManager gameManager;
 
@@ -33,11 +31,12 @@ namespace castelvaniaripoff
             spriteBatch = new SpriteBatch(GraphicsDevice);
             gameManager = new GameManager(Content);
 
+            // TODO Move this to the main manu state once implemented
             backgroundMusic = Content.Load<Song>("Audio/Music/main_menu");
             MediaPlayer.Play(backgroundMusic);
             MediaPlayer.IsRepeating = true;
 
-            // Doing this just to have to have a pixel to draw the bounding box. XNA is so powerful that it doesn't have a way to draw a simple rectangle.
+            // TODO Remove once the dev work is done 
             pixel = new Texture2D(GraphicsDevice, 1, 1);
             pixel.SetData(new[] { Color.White });
             base.LoadContent();
@@ -45,7 +44,7 @@ namespace castelvaniaripoff
 
         override protected void Update(GameTime gameTime)
         {
-            gameManager.UpdateState();
+            gameManager.UpdateState(gameTime);
             base.Update(gameTime);
         }
 
@@ -60,11 +59,6 @@ namespace castelvaniaripoff
             spriteBatch.End();
 
             base.Draw(gameTime);
-        }
-
-        private void ExitGame()
-        {
-            this.Exit();
         }
     }
 }

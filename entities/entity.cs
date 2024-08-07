@@ -3,14 +3,13 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 /// <summary>
-/// Class <c>Entity</c> represents a generic entity in the game.
+/// Class <c>Entity</c> represents a generic entity in the game. We can call it like a GameObject in Unity.
 /// </summary>
 abstract class Entity
 {
     public abstract int id { get; }
     public abstract float width { get; }
     public abstract float height { get; }
-    // The position of the entity in the game. This will be used to draw the entity in the screen and collision detection.
     public abstract Vector2 position { get; set; }
     public Texture2D sprite { get; set; }
     public abstract bool isPlayable { get; }
@@ -19,7 +18,6 @@ abstract class Entity
     public abstract bool isColliding(Entity entity);
     public abstract bool ShouldShowBoundingBox { get; set; }
 
-    // We need to have the ContentManager to load the entity's texture.
     public Entity(ContentManager content, string spritePath)
     {
         this.sprite = content.Load<Texture2D>(spritePath);

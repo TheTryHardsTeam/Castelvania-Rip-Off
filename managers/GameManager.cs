@@ -1,3 +1,4 @@
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -8,7 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 class GameManager
 {
     State currentState;
-    ContentManager content { get; set; }
+    ContentManager content;
 
     public GameManager(ContentManager content)
     {
@@ -17,9 +18,9 @@ class GameManager
         this.currentState.LoadState(this.content);
     }
 
-    public void UpdateState()
+    public void UpdateState(GameTime gameTime)
     {
-        this.currentState.UpdateState();
+        this.currentState.UpdateState(gameTime);
     }
 
     public void DrawState(SpriteBatch spriteBatch, Texture2D boundingBoxPixel = null)

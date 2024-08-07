@@ -1,3 +1,4 @@
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -10,9 +11,9 @@ class PlayingState : State
         player = new Player("Player", 50, 50, 24, 24, "Graphics/Characters/main", content);
     }
 
-    public override void UpdateState()
+    public override void UpdateState(GameTime gameTime)
     {
-        // Update the main menu
+        player.Update(gameTime);
     }
 
     public override void DrawState(SpriteBatch spriteBatch, Texture2D boundingBoxPixel = null)
