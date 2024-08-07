@@ -1,11 +1,13 @@
 using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace castelvaniaripoff
 {
     class Game1 : Game
     {
+        private KeyboardState keyboardState;
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Player player;
@@ -34,8 +36,15 @@ namespace castelvaniaripoff
 
         override protected void Update(GameTime gameTime)
         {
-            player.Update(gameTime);
+            keyboardState = Keyboard.GetState();
+
+            if (keyboardState.IsKeyDown(Keys.Escape))
+            {
+                ExitGame();
+            }
+
             base.Update(gameTime);
+            player.Update(gameTime);
         }
 
         override protected void Draw(GameTime gameTime)
@@ -49,6 +58,11 @@ namespace castelvaniaripoff
             spriteBatch.End();
 
             base.Draw(gameTime);
+        }
+
+        private void ExitGame()
+        {
+            this.Exit();
         }
     }
 }
