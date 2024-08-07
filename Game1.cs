@@ -34,8 +34,9 @@ namespace castelvaniaripoff
             // TODO I need to create a better way to load the player, for now I will just create it here, possible a PlayerManager?.
             player = new Player("Player", 100, 100, 50, 50, 24, 24, playerTexture);
 
-            backgroundMusic = Content.Load<Song>("Audio/Music/background_normal");
+            backgroundMusic = Content.Load<Song>("Audio/Music/main_menu");
             MediaPlayer.Play(backgroundMusic);
+            MediaPlayer.IsRepeating = true;
 
             // Doing this just to have to have a pixel to draw the bounding box. XNA is so powerful that it doesn't have a way to draw a simple rectangle.
             pixel = new Texture2D(GraphicsDevice, 1, 1);
