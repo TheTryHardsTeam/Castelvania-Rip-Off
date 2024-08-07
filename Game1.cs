@@ -11,7 +11,7 @@ namespace castelvaniaripoff
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Player player;
-        Texture2D playerTexture;
+        Texture2D playerTexture, pixel;
 
         public Game1()
         {
@@ -21,16 +21,20 @@ namespace castelvaniaripoff
 
         override protected void Initialize()
         {
-            spriteBatch = new SpriteBatch(GraphicsDevice);
-            // TODO Possibly I need a better way to load the textures for the player, for now I will just load it here.
-            playerTexture = Content.Load<Texture2D>("Graphics/Characters/main");
-            // TODO I need to create a better way to load the player, for now I will just create it here, possible a PlayerManager?.
-            player = new Player("Player", 100, 100, 50, 50, 50, 50, playerTexture);
             base.Initialize();
         }
 
         override protected void LoadContent()
         {
+            spriteBatch = new SpriteBatch(GraphicsDevice);
+            // TODO Possibly I need a better way to load the textures for the player, for now I will just load it here.
+            playerTexture = Content.Load<Texture2D>("Graphics/Characters/main");
+            // TODO I need to create a better way to load the player, for now I will just create it here, possible a PlayerManager?.
+            player = new Player("Player", 100, 100, 50, 50, 24, 24, playerTexture);
+
+            // Doing this just to have to have a pixel to draw the bounding box. XNA is so powerful that it doesn't have a way to draw a simple rectangle.
+            pixel = new Texture2D(GraphicsDevice, 1, 1);
+            pixel.SetData(new[] { Color.White });
             base.LoadContent();
         }
 
@@ -54,7 +58,7 @@ namespace castelvaniaripoff
             // We need to share the same instance of spriteBatch between the entities. We can say that this is Dependency Injection.
             // And Singleton Pattern too, Taking this as a reference https://stackoverflow.com/questions/13970726/best-practices-efficient-sprite-drawing-in-xna
             spriteBatch.Begin();
-            player.Draw(spriteBatch);
+            player.Draw(spriteBatch, pixel);
             spriteBatch.End();
 
             base.Draw(gameTime);
